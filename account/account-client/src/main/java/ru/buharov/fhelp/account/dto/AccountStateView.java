@@ -1,6 +1,7 @@
 package ru.buharov.fhelp.account.dto;
 
 import java.util.Date;
+import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +15,7 @@ import ru.buharov.fhelp.account.domain.ValutaEnum;
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class AccountStateView {
-    private Long id;
+    private UUID id;
     private Double balance;
     private String comment;
     private Date modified;

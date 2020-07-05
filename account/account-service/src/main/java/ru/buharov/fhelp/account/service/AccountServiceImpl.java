@@ -20,16 +20,7 @@ class AccountServiceImpl implements AccountService {
     public List<AccountView> getAccounts() {
         return ImmutableList.copyOf(repository.findAll().iterator())
                 .stream()
-                .map(this::convertToDto)
+                .map(AccountEntity::convertToDto)
                 .collect(Collectors.toList());
-    }
-
-    private AccountView convertToDto(AccountEntity accountEntity) {
-        return AccountView.builder()
-                .id(accountEntity.getId())
-                .name(accountEntity.getName())
-                .type(accountEntity.getType())
-                .valuta(accountEntity.getValuta())
-                .build();
     }
 }

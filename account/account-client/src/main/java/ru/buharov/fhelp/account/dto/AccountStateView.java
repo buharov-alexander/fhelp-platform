@@ -1,5 +1,6 @@
 package ru.buharov.fhelp.account.dto;
 
+import java.util.Date;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,10 +13,9 @@ import ru.buharov.fhelp.account.domain.ValutaEnum;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
-public class AccountView {
+public class AccountStateView {
     private Long id;
-    private String name;
-    private AccountTypeEnum type;
-    private ValutaEnum valuta;
-    private AccountStateView state;
+    private Double balance;
+    private String comment;
+    private Date modified;
 }

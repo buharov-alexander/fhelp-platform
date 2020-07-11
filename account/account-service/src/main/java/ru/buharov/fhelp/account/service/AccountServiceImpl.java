@@ -1,10 +1,15 @@
 package ru.buharov.fhelp.account.service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 import com.google.common.collect.ImmutableList;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.buharov.fhelp.account.domain.AccountEntity;
+import ru.buharov.fhelp.account.domain.AccountStateEntity;
+import ru.buharov.fhelp.account.dto.AccountStateView;
 import ru.buharov.fhelp.account.dto.AccountView;
 
 @Service
@@ -22,5 +27,22 @@ class AccountServiceImpl implements AccountService {
                 .stream()
                 .map(AccountEntity::convertToDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public AccountView createAccount(AccountView accountView) {
+        return repository.save(new AccountEntity(accountView)).convertToDto();
+    }
+
+    @Override
+    @Transactional
+    public AccountView updateAccountState(UUID id, AccountStateView accountStateView) {
+        AccountEntity account = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(String.format("Account %s is not found", id)));
+        AccountStateEntity state = account.getState();
+        state.setBalance(accountStateView.getBalance());
+        state.setComment(accountStateView.getComment());
+        state.setModified(new Date());
+        return account.convertToDto();
     }
 }

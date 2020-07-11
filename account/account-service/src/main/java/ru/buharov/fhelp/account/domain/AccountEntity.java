@@ -1,5 +1,6 @@
 package ru.buharov.fhelp.account.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -47,9 +48,16 @@ public class AccountEntity {
 
     private String owner;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "stateId")
     private AccountStateEntity state;
+
+    public AccountEntity(AccountView accountView) {
+        name = accountView.getName();
+        type = accountView.getType();
+        valuta = accountView.getValuta();
+        state = new AccountStateEntity(accountView.getState());
+    }
 
     public AccountView convertToDto() {
         return AccountView.builder()

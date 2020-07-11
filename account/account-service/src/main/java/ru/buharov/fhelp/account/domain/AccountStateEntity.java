@@ -36,6 +36,12 @@ public class AccountStateEntity {
     private String comment;
     private Date modified;
 
+    public AccountStateEntity(AccountStateView state) {
+        balance = state != null ? state.getBalance() : 0d;
+        comment = state != null ? state.getComment() : null;
+        modified = new Date();
+    }
+
     public AccountStateView convertToDto() {
         return AccountStateView.builder()
                 .id(getId())

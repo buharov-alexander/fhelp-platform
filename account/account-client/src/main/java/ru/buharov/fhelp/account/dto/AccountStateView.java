@@ -7,8 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.buharov.fhelp.account.domain.AccountTypeEnum;
-import ru.buharov.fhelp.account.domain.ValutaEnum;
 
 @Data
 @Builder

@@ -30,6 +30,11 @@ class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public AccountView getAccount(UUID id) {
+        return findById(id).convertToDto();
+    }
+
+    @Override
     public AccountView createAccount(AccountView accountView) {
         return repository.save(new AccountEntity(accountView)).convertToDto();
     }
@@ -37,12 +42,21 @@ class AccountServiceImpl implements AccountService {
     @Override
     @Transactional
     public AccountView updateAccountState(UUID id, AccountStateView accountStateView) {
-        AccountEntity account = repository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException(String.format("Account %s is not found", id)));
+        AccountEntity account = findById(id);
         AccountStateEntity state = account.getState();
         state.setBalance(accountStateView.getBalance());
         state.setComment(accountStateView.getComment());
         state.setModified(new Date());
         return account.convertToDto();
+    }
+
+    @Override
+    public void deleteAccount(UUID id) {
+        repository.deleteById(id);
+    }
+
+    private AccountEntity findById(UUID id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(String.format("Account %s is not found", id)));
     }
 }

@@ -35,6 +35,7 @@ class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional
     public AccountView createAccount(AccountView accountView) {
         return repository.save(new AccountEntity(accountView)).convertToDto();
     }
@@ -51,6 +52,7 @@ class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    @Transactional
     public void deleteAccount(UUID id) {
         repository.deleteById(id);
     }

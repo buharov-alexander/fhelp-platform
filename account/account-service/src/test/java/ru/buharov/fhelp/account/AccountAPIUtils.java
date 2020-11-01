@@ -31,7 +31,7 @@ class AccountAPIUtils {
         return objectMapper.readValue(result.getResponse().getContentAsString(), AccountView.class);    }
 
     static AccountView saveAccount(String name, MockMvc mvc) throws Exception {
-        String accountBody = createAccountJson(name);
+        String accountBody = createAccountJson(name, AccountTypeEnum.CASH, ValutaEnum.RUB);
         MvcResult result = mvc.perform(post("/account")
                 .content(accountBody)
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
@@ -50,11 +50,11 @@ class AccountAPIUtils {
         return Arrays.asList(accounts);
     }
 
-    private static String createAccountJson(String name) throws JsonProcessingException {
+    static String createAccountJson(String name, AccountTypeEnum type, ValutaEnum valuta) throws JsonProcessingException {
         AccountView accountView = AccountView.builder()
                 .name(name)
-                .type(AccountTypeEnum.CASH)
-                .valuta(ValutaEnum.RUB)
+                .type(type)
+                .valuta(valuta)
                 .build();
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(accountView);

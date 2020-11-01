@@ -6,12 +6,18 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.Assert;
+import ru.buharov.fhelp.account.domain.AccountTypeEnum;
+import ru.buharov.fhelp.account.domain.ValutaEnum;
 import ru.buharov.fhelp.account.dto.AccountView;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static ru.buharov.fhelp.account.AccountAPIUtils.createAccountJson;
 import static ru.buharov.fhelp.account.AccountAPIUtils.deleteAccount;
 import static ru.buharov.fhelp.account.AccountAPIUtils.getAccount;
 import static ru.buharov.fhelp.account.AccountAPIUtils.getAccountList;
@@ -46,6 +52,24 @@ public class AccountAPITest {
 
         // check that account was removed
         checkAccountNotExist(TEST_ACCOUNT_NAME);
+    }
+
+    @Test
+    void saveAccount_withoutType() throws Exception {
+        String accountBody = createAccountJson(TEST_ACCOUNT_NAME, null, ValutaEnum.RUB);
+        mvc.perform(post("/account")
+                .content(accountBody)
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isBadRequest()).andReturn();
+    }
+
+    @Test
+    void saveAccount_withoutValuta() throws Exception {
+        String accountBody = createAccountJson(TEST_ACCOUNT_NAME, AccountTypeEnum.CASH, null);
+        mvc.perform(post("/account")
+                .content(accountBody)
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isBadRequest()).andReturn();
     }
 
     private void checkAccountNotExist(String name) throws Exception {

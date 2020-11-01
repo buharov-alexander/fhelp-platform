@@ -1,6 +1,7 @@
 package ru.buharov.fhelp.account.domain;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -9,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.AccessLevel;
@@ -38,15 +42,17 @@ public class AccountEntity {
     @Type(type = "uuid-char")
     private UUID id;
 
+    @Column(unique=true)
+    @NotBlank(message = "Account name is mandatory")
     private String name;
 
+    @NotNull(message = "Account type is mandatory")
     @Enumerated(EnumType.STRING)
     private AccountTypeEnum type;
 
+    @NotNull(message = "Account valuta is mandatory")
     @Enumerated(EnumType.STRING)
     private ValutaEnum valuta;
-
-    private String owner;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "stateId")

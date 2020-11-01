@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.UUID;
 import lombok.AccessLevel;
@@ -32,6 +33,8 @@ public class AccountStateEntity {
     @ColumnDefault("random_uuid()")
     @Type(type = "uuid-char")
     private UUID id;
+
+    @NotNull(message = "Account balance is mandatory")
     private Double balance;
     private String comment;
     private Date modified;

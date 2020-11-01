@@ -1,5 +1,7 @@
 package ru.buharov.fhelp.account.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -15,8 +17,11 @@ import ru.buharov.fhelp.account.domain.ValutaEnum;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class AccountView {
     private UUID id;
+    @NotBlank(message = "Account name is mandatory")
     private String name;
+    @NotNull(message = "Account type is mandatory")
     private AccountTypeEnum type;
+    @NotNull(message = "Account valuta is mandatory")
     private ValutaEnum valuta;
     private AccountStateView state;
 }

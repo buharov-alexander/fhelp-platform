@@ -1,5 +1,6 @@
 package ru.buharov.fhelp.account.controller;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -40,12 +41,12 @@ public class AccountController {
     }
 
     @PostMapping
-    public AccountView createAccount(@RequestBody AccountView accountView) {
+    public AccountView createAccount(@Valid @RequestBody AccountView accountView) {
         return service.createAccount(accountView);
     }
 
     @PutMapping(path = "/{id}/state")
-    public AccountView createAccount(@PathVariable UUID id, @RequestBody AccountStateView accountStateView) {
+    public AccountView createAccount(@PathVariable UUID id, @Valid @RequestBody AccountStateView accountStateView) {
         return service.updateAccountState(id, accountStateView);
     }
 }

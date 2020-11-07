@@ -1,6 +1,7 @@
 package ru.buharov.fhelp.account;
 
 import java.util.List;
+import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,12 @@ import ru.buharov.fhelp.account.domain.AccountTypeEnum;
 import ru.buharov.fhelp.account.domain.ValutaEnum;
 import ru.buharov.fhelp.account.dto.AccountView;
 
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.matchesRegex;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.buharov.fhelp.account.AccountAPIUtils.createAccountJson;
 import static ru.buharov.fhelp.account.AccountAPIUtils.deleteAccount;
@@ -60,7 +66,8 @@ public class AccountAPITest {
         mvc.perform(post("/account")
                 .content(accountBody)
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isBadRequest()).andReturn();
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errorMessage", is("Account type is mandatory")));
     }
 
     @Test
@@ -69,7 +76,22 @@ public class AccountAPITest {
         mvc.perform(post("/account")
                 .content(accountBody)
                 .contentType(MediaType.APPLICATION_JSON_VALUE))
-                .andExpect(status().isBadRequest()).andReturn();
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errorMessage", is("Account valuta is mandatory")));
+    }
+
+    @Test
+    void getNotExistedAccount() throws Exception {
+        mvc.perform(get("/account/{id}", UUID.randomUUID()).contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errorMessage", matchesRegex("Account .* is not found")));
+    }
+
+    @Test
+    void deleteNotExistedAccount() throws Exception {
+        mvc.perform(delete("/account/{id}", UUID.randomUUID()).contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.errorMessage", matchesRegex("Account .* is not found")));
     }
 
     private void checkAccountNotExist(String name) throws Exception {

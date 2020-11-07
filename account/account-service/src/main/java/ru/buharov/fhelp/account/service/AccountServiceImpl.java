@@ -54,6 +54,7 @@ class AccountServiceImpl implements AccountService {
     @Override
     @Transactional
     public void deleteAccount(UUID id) {
+        findById(id);
         repository.deleteById(id);
     }
 

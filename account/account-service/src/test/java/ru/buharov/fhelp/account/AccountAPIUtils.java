@@ -10,11 +10,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import ru.buharov.fhelp.account.domain.AccountTypeEnum;
 import ru.buharov.fhelp.account.domain.ValutaEnum;
+import ru.buharov.fhelp.account.dto.AccountStateView;
 import ru.buharov.fhelp.account.dto.AccountView;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class AccountAPIUtils {
@@ -40,6 +42,17 @@ class AccountAPIUtils {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readValue(result.getResponse().getContentAsString(), AccountView.class);
     }
+
+    static AccountView updateAccountState(UUID accountId, AccountStateView stateView, MockMvc mvc) throws Exception {
+        MvcResult result = mvc.perform(put("/account/{id}/state", accountId)
+                .content(new ObjectMapper().writeValueAsString(stateView))
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(status().isOk()).andReturn();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(result.getResponse().getContentAsString(), AccountView.class);
+    }
+
 
     static List<AccountView> getAccountList(MockMvc mvc) throws Exception {
         MvcResult result = mvc.perform(get("/account/list").contentType(MediaType.APPLICATION_JSON_VALUE))

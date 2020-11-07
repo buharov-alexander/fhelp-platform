@@ -46,7 +46,7 @@ public class AccountController {
     }
 
     @PutMapping(path = "/{id}/state")
-    public AccountView createAccount(@PathVariable UUID id, @Valid @RequestBody AccountStateView accountStateView) {
+    public AccountView updateAccountState(@PathVariable UUID id, @Valid @RequestBody AccountStateView accountStateView) {
         return service.updateAccountState(id, accountStateView);
     }
 }

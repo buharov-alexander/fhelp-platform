@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -39,9 +40,9 @@ public class AccountStateEntity {
     private String comment;
     private Date modified;
 
-    public AccountStateEntity(AccountStateView state) {
-        balance = state != null ? state.getBalance() : 0d;
-        comment = state != null ? state.getComment() : null;
+    public AccountStateEntity(Optional<AccountStateView> state) {
+        balance = state.map(AccountStateView::getBalance).orElse(0d);
+        comment = state.map(AccountStateView::getComment).orElse(null);
         modified = new Date();
     }
 

@@ -15,6 +15,10 @@
 	<name>account-service</name>
 	<description>Account parent project</description>
 
+	<properties>
+		<java.version>11</java.version>
+	</properties>
+
 	<modules>
 		<module>account-client</module>
 		<module>account-service</module>

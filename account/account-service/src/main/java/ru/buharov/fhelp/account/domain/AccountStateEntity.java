@@ -36,13 +36,15 @@ public class AccountStateEntity {
     private UUID id;
 
     @NotNull(message = "Account balance is mandatory")
-    private Double balance;
+    private Double balance = 0d;
     private String comment;
     private Date modified;
 
-    public AccountStateEntity(Optional<AccountStateView> state) {
-        balance = state.map(AccountStateView::getBalance).orElse(0d);
-        comment = state.map(AccountStateView::getComment).orElse(null);
+    public AccountStateEntity(AccountStateView state) {
+        if (state != null) {
+            balance = state.getBalance();
+            comment = state.getComment();
+        }
         modified = new Date();
     }
 

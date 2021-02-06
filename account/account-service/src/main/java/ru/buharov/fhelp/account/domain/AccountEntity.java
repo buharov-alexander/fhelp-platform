@@ -62,7 +62,7 @@ public class AccountEntity {
         name = accountView.getName();
         type = accountView.getType();
         valuta = accountView.getValuta();
-        state = new AccountStateEntity(Optional.ofNullable(accountView.getState()));
+        state = new AccountStateEntity(accountView.getState());
     }
 
     public AccountView convertToDto() {

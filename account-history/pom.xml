@@ -11,7 +11,7 @@
 	<groupId>ru.buharov.fhelp</groupId>
 	<artifactId>account-history-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1-SNAPSHOT</version>
 	<name>account-history</name>
 	<description>Account history parent project</description>
 
@@ -21,6 +21,7 @@
 
 	<modules>
 		<module>account-history-service</module>
+		<module>account-history-client</module>
 	</modules>
 
 	<build>

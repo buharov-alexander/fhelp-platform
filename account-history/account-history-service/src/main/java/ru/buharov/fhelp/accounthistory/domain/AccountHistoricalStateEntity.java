@@ -8,13 +8,16 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.UUID;
 
+import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import ru.buharov.fhelp.account.dto.AccountStateView;
 
+@Data
 @Entity
 @Table(name = "account_historical_states")
-public class AccountHistoricalState {
+public class AccountHistoricalStateEntity {
 	@Id
 	@GeneratedValue(generator = "UUID")
 	@GenericGenerator(
@@ -32,4 +35,12 @@ public class AccountHistoricalState {
 	private String comment;
 	private Date date;
 
+	public AccountStateView convertToDto() {
+		return AccountStateView.builder()
+				.id(id)
+				.balance(balance)
+				.comment(comment)
+				.date(date)
+				.build();
+	}
 }

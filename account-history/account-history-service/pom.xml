@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>account-history-parent</artifactId>
 		<groupId>ru.buharov.fhelp</groupId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>account-history-service</artifactId>
 
@@ -17,12 +17,36 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+			<version>${lombok.version}</version>
+		</dependency>
+
+		<!--Client-->
+		<dependency>
+			<groupId>ru.buharov.fhelp</groupId>
+			<artifactId>account-history-client</artifactId>
+			<version>0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>ru.buharov.fhelp</groupId>
+			<artifactId>account-client</artifactId>
+			<version>0.1-SNAPSHOT</version>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -47,7 +47,7 @@ class AccountServiceImpl implements AccountService {
         AccountStateEntity state = account.getState();
         state.setBalance(accountStateView.getBalance());
         state.setComment(accountStateView.getComment());
-        state.setModified(new Date());
+        state.setDate(new Date());
         return account.convertToDto();
     }
 

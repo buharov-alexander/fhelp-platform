@@ -6,7 +6,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.Optional;
 import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -38,22 +37,22 @@ public class AccountStateEntity {
     @NotNull(message = "Account balance is mandatory")
     private Double balance = 0d;
     private String comment;
-    private Date modified;
+    private Date date;
 
-    public AccountStateEntity(AccountStateView state) {
+    AccountStateEntity(AccountStateView state) {
         if (state != null) {
             balance = state.getBalance();
             comment = state.getComment();
         }
-        modified = new Date();
+        date = new Date();
     }
 
-    public AccountStateView convertToDto() {
+    AccountStateView convertToDto() {
         return AccountStateView.builder()
                 .id(getId())
                 .balance(getBalance())
                 .comment(getComment())
-                .modified(getModified())
+                .date(getDate())
                 .build();
     }
 }

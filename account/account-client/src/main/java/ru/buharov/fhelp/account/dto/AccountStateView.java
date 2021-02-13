@@ -18,5 +18,5 @@ public class AccountStateView {
     @NotNull(message = "Account balance is mandatory")
     private Double balance;
     private String comment;
-    private Date modified;
+    private Date date;
 }

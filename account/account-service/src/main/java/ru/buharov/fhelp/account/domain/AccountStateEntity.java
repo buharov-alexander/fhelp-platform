@@ -18,7 +18,6 @@ import org.hibernate.annotations.Type;
 import ru.buharov.fhelp.account.dto.AccountStateView;
 
 @Data
-@Builder
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @Entity

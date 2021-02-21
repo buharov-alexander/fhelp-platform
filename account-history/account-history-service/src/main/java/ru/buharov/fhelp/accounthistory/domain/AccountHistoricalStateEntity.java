@@ -8,13 +8,18 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.UUID;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import ru.buharov.fhelp.account.dto.AccountStateView;
 
 @Data
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @Entity
 @Table(name = "account_historical_states")
 public class AccountHistoricalStateEntity {
@@ -29,6 +34,7 @@ public class AccountHistoricalStateEntity {
 	private UUID id;
 
 	@NotNull(message = "Account id is mandatory")
+	@Type(type = "uuid-char")
 	private UUID accountId;
 	@NotNull(message = "Account balance is mandatory")
 	private Double balance = 0d;

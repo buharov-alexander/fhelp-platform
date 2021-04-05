@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="drawer" permanent mini-variant="">
+  <v-navigation-drawer app v-model="drawer" permanent mini-variant="">
     <v-list nav dense>
       <v-list-item-group>
         <v-list-item>

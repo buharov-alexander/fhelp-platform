@@ -2,7 +2,7 @@
   <v-sheet class="sheet" elevation="1" color="deep-purple lighten-4" rounded>
     <v-data-table
       :headers="headers"
-      :items="accounts"
+      :items="$store.state.accounts"
       class="elevation-1"
       hide-default-footer
     ></v-data-table>
@@ -16,16 +16,6 @@ export default {
       headers: [
         { text: "Name", value: "name" },
         { text: "Balance", value: "balance" },
-      ],
-      accounts: [
-        {
-          name: "Alfa Saving Account",
-          balance: 159000,
-        },
-        {
-          name: "Tinkoff Deposit",
-          balance: 75000,
-        },
       ],
     };
   },

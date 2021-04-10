@@ -2,7 +2,7 @@
   <v-sheet class="sheet" elevation="1" color="deep-purple lighten-4" rounded>
     <v-data-table
       :headers="headers"
-      :items="$store.state.accounts"
+      :items="accounts"
       class="elevation-1"
       hide-default-footer
     ></v-data-table>
@@ -15,9 +15,22 @@ export default {
     return {
       headers: [
         { text: "Name", value: "name" },
-        { text: "Balance", value: "balance" },
+        { text: "Balance", value: "state.balance" },
       ],
     };
+  },
+  computed: {
+    accounts() {
+      return this.$store.state.accounts;
+    },
+  },
+  mounted() {
+    this.fetchAccounts();
+  },
+  methods: {
+    fetchAccounts() {
+      return this.$store.dispatch("fetchAccounts");
+    },
   },
 };
 </script>

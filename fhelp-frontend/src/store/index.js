@@ -17,8 +17,16 @@ export default new Vuex.Store({
     ],
   },
   mutations: {
+    setAccounts(state, accounts) {
+      state.accounts = accounts;
+    }
   },
   actions: {
+    fetchAccounts (state) {
+      fetch("http://localhost:8080/account/list")
+        .then(response => response.json())
+        .then(accounts => state.commit('setAccounts', accounts));
+    }
   },
   modules: {
   }

@@ -36,7 +36,7 @@ import static ru.buharov.fhelp.account.AccountAPIUtils.updateAccountState;
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
 @TestPropertySource(
-        locations = "classpath:application-test.properties")
+        locations = "classpath:application-test.yml")
 public class AccountAPITest {
 
     private static final String TEST_ACCOUNT_NAME = "TestAccount";

@@ -1,0 +1,34 @@
+version: '3'
+services:
+  configserver:
+    image: buharovalexander/fhelp-config-server
+    ports:
+      - "8888:8888"
+  account:
+    image: buharovalexander/fhelp-account
+    ports:
+      - "8081:8081"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8888/
+    depends_on:
+      - configserver
+  account-history:
+    image: buharovalexander/fhelp-account-history
+    ports:
+      - "8082:8082"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8888/
+    depends_on:
+      - configserver

@@ -32,3 +32,11 @@ services:
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8888/
     depends_on:
       - configserver
+  frontend:
+    image: buharovalexander/fhelp-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - account
+      - account-history
+    profiles: ["front"]

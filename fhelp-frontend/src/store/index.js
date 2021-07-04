@@ -23,7 +23,7 @@ export default new Vuex.Store({
   },
   actions: {
     fetchAccounts (state) {
-      fetch("http://localhost:8080/account/list")
+      fetch("http://localhost:8081/account/list")
         .then(response => response.json())
         .then(accounts => state.commit('setAccounts', accounts));
     }

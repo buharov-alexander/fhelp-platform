@@ -1,4 +1,4 @@
-package ru.buharov.fhelp.account.service.event;
+package ru.buharov.fhelp.account.event;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;

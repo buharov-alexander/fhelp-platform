@@ -21,6 +21,7 @@ public class AccountMessageProducer {
 	}
 
 	public void sendMessage(String key, AccountView accountView) {
+		log.info("Send message: {}, {}", key, accountView);
 		kafkaTemplate.send(kafkaTopicAccountName, key, accountView);
 	}
 }

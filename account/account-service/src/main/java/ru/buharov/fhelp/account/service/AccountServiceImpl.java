@@ -13,8 +13,8 @@ import ru.buharov.fhelp.account.domain.AccountEntity;
 import ru.buharov.fhelp.account.domain.AccountStateEntity;
 import ru.buharov.fhelp.account.dto.AccountStateView;
 import ru.buharov.fhelp.account.dto.AccountView;
-import ru.buharov.fhelp.account.service.event.AccountEvent;
-import ru.buharov.fhelp.account.service.event.AccountEventType;
+import ru.buharov.fhelp.account.event.AccountEvent;
+import ru.buharov.fhelp.account.event.AccountEventType;
 
 @Service
 class AccountServiceImpl implements AccountService {

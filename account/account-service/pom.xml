@@ -16,7 +16,7 @@
 		<java.version>11</java.version>
 
 		<lombok.version>1.18.2</lombok.version>
-		<guava.version>29.0-jre</guava.version>
+		<guava.version>32.0.0-jre</guava.version>
 		<spring-cloud.version>2020.0.2</spring-cloud.version>
 	</properties>
 
